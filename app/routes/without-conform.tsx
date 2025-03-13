@@ -1,4 +1,4 @@
-import { Form, redirect } from "react-router";
+import { Form, Link, redirect } from "react-router";
 import { sendMessage } from "utils/db";
 import { z } from "zod";
 import type { Route } from "./+types/without-conform";
@@ -58,6 +58,14 @@ export default function Index({ actionData }: Route.ComponentProps) {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-md mx-auto px-4">
+        <div className="mb-6">
+          <Link
+            to="/"
+            className="text-blue-600 hover:text-blue-800 font-medium"
+          >
+            ← Back to Home
+          </Link>
+        </div>
         <Form
           method="POST"
           className="bg-white shadow-md rounded-lg p-6 space-y-6"
