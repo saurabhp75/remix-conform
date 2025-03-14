@@ -1,5 +1,6 @@
 import { remember } from "@epic-web/remember";
 import { PrismaClient } from "@prisma/client";
+import type { UserType } from "~/routes/array-form";
 
 export const prisma = remember("prisma", () => {
   // NOTE: if you change anything in this function you'll need to restart
@@ -35,7 +36,7 @@ type CreateAddressParams = {
 
 export async function createAddress(data: CreateAddressParams) {
   const win = Math.random() > 0.5;
-  
+
   if (win) return { sent: null };
 
   const address = await prisma.address.create({
@@ -50,40 +51,36 @@ export async function createAddress(data: CreateAddressParams) {
   return address;
 }
 
-type CreateUserParams = {
-  contacts: {
-    email: string;
-  }[];
-};
-
-export async function createUser(data: CreateUserParams) {
+export async function createUser(data: UserType) {
   const win = Math.random() > 0.5;
   if (win) {
     console.log("### Toss failed ###");
     return null;
   }
 
-  if (!data.contacts) {
+  if (!data.emails) {
     console.log("### No contacts ###");
     return null;
   }
 
-  // try {
-  //   const user = await prisma.user.create({
-  //     data: {
-  //       contacts: {
-  //         create: data.contacts.map((contact) => ({
-  //           email: contact.email,
-  //         })),
-  //       },
-  //     },
-  //   });
+  try {
+    const user = await prisma.user.create({
+      data: {
+        name: data.name,
+        age: data.age,
+        contacts: {
+          create: data.emails.map((email) => ({
+            email,
+          })),
+        },
+      },
+    });
 
-  //   return user;
-  // } catch (e) {
-  //   console.log("Error inserting user in db");
-  //   return null;
-  // }
+    return user;
+  } catch (e) {
+    console.log("Error inserting user in db");
+    return null;
+  }
 }
 
 export async function dummyAsyncCheck(msg: string) {
