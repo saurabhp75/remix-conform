@@ -76,34 +76,73 @@ export default function Index() {
   });
 
   return (
-    <div>
-      <div>
-        <Link to="/">Home</Link>
-      </div>
-      <div>
-        <p>
-          This form is implemented using fetcher, which post on a different
-          route
-        </p>
-      </div>
-      <fetcher.Form
-        method="POST"
-        {...getFormProps(form)}
-        action="/send-message"
-      >
-        <div>
-          <label htmlFor={fields.email.id}>Email</label>
-          <input {...getInputProps(fields.email, { type: "email" })} />
-          <div id={fields.email.errorId}>{fields.email.errors}</div>
+    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md mx-auto">
+        <div className="mb-8 flex items-center justify-between">
+          <Link
+            to="/"
+            className="text-indigo-600 hover:text-indigo-500 flex items-center gap-2"
+          >
+            <span>←</span> Back to Home
+          </Link>
+          <h2 className="text-2xl font-bold text-gray-900">Fetcher Form</h2>
         </div>
-        <div>
-          <label htmlFor={fields.message.id}>Message</label>
-          <textarea {...getTextareaProps(fields.message)} />
-          <div id={fields.message.errorId}>{fields.message.errors}</div>
+
+        <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+          <p className="mb-6 text-sm text-gray-600">
+            This form is implemented using fetcher
+          </p>
+
+          <fetcher.Form
+            method="POST"
+            {...getFormProps(form)}
+            action="/send-message"
+            className="space-y-6"
+          >
+            <div className="space-y-1">
+              <label
+                htmlFor={fields.email.id}
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email
+              </label>
+              <input
+                {...getInputProps(fields.email, { type: "email" })}
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out"
+                placeholder="Enter your email"
+              />
+              <div id={fields.email.errorId} className="text-sm text-red-600">
+                {fields.email.errors}
+              </div>
+            </div>
+
+            <div className="space-y-1">
+              <label
+                htmlFor={fields.message.id}
+                className="block text-sm font-medium text-gray-700"
+              >
+                Message
+              </label>
+              <textarea
+                {...getTextareaProps(fields.message)}
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out min-h-[120px]"
+                placeholder="Type your message here..."
+              />
+              <div id={fields.message.errorId} className="text-sm text-red-600">
+                {fields.message.errors}
+              </div>
+            </div>
+
+            <div id={form.errorId} className="text-sm text-red-600">
+              {form.errors}
+            </div>
+
+            <button className="w-full py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+              Send Message
+            </button>
+          </fetcher.Form>
         </div>
-        <div id={form.errorId}>{form.errors}</div>
-        <button>Send</button>
-      </fetcher.Form>
+      </div>
     </div>
   );
 }
