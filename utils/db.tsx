@@ -37,7 +37,7 @@ type CreateAddressParams = {
 export async function createAddress(data: CreateAddressParams) {
   const win = Math.random() > 0.5;
 
-  if (win) return { sent: null };
+  if (win) return null;
 
   const address = await prisma.address.create({
     data: {
@@ -53,8 +53,11 @@ export async function createAddress(data: CreateAddressParams) {
 
 export async function createUser(data: UserType) {
   const win = Math.random() > 0.5;
+
   if (win) {
-    console.log("### Toss failed ###");
+    console.log("### Something went wrong ###");
+    console.log(win);
+
     return null;
   }
 

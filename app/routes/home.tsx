@@ -63,7 +63,7 @@ export default function Home() {
         </li>
         <li className="mb-2">
           <p>
-            <Link to="form-resource" className="text-blue-500 hover:underline">
+            <Link to="form-fetcher" className="text-blue-500 hover:underline">
               Form action in other(resource) route
             </Link>
           </p>

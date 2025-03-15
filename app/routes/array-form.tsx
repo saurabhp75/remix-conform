@@ -27,7 +27,15 @@ export async function action({ request }: Route.ActionArgs) {
   if (submission.status !== "success") {
     return submission.reply();
   }
-  createUser(submission.value);
+  const user = createUser(submission.value);
+  // Return a form error if the message is not sent
+  if (!user) {
+    console.log("*** Failed to send the message ***");
+
+    return submission.reply({
+      formErrors: ["Failed to send the message. Please try again later."],
+    });
+  }
 
   return redirect("/user");
 }
