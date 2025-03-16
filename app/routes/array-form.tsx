@@ -14,7 +14,7 @@ export const UserSchema = z.object({
     })
     .gte(1, "Age must be greater than 1")
     .lte(120, "Age must be less than 120"),
-  emails: z.array(z.string()),
+  emails: z.array(z.string().email("Invalid email")),
 });
 
 export type UserType = z.infer<typeof UserSchema>;
