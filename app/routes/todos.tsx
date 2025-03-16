@@ -7,7 +7,7 @@ import {
 import { parseWithZod } from "@conform-to/zod";
 import { z } from "zod";
 import type { Route } from "./+types/todos";
-import { Form, Link } from "react-router";
+import { Form, Link, redirect } from "react-router";
 
 const taskSchema = z.object({
   content: z.string(),
@@ -26,7 +26,7 @@ export async function action({ request }: Route.ActionArgs) {
   });
 
   if (submission.status !== "success") {
-    return json(submission.reply());
+    return submission.reply();
   }
 
   return redirect(`/?value=${JSON.stringify(submission.value)}`);
@@ -58,6 +58,7 @@ export default function Example({ actionData }: Route.ComponentProps) {
 
         <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
           <Form method="post" {...getFormProps(form)} className="space-y-6">
+            <button type="submit" className="hidden" />
             <div className="space-y-1">
               <label
                 htmlFor={fields.title.id}
@@ -124,7 +125,9 @@ export default function Example({ actionData }: Route.ComponentProps) {
                       <div className="space-y-4">
                         <div>
                           <input
-                            {...getInputProps(taskFields.content, { type: "text" })}
+                            {...getInputProps(taskFields.content, {
+                              type: "text",
+                            })}
                             className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             placeholder="Enter task description"
                           />

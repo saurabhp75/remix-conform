@@ -7,10 +7,9 @@ import {
 import { getZodConstraint, parseWithZod } from "@conform-to/zod";
 import { data, Link, redirect, useFetcher } from "react-router";
 import { z } from "zod";
-// import { action } from "./send-message";
 import { GeneralErrorBoundary } from "~/components/error-boundary";
 import { dummyAsyncCheck, sendMessage } from "utils/db";
-import type { Route } from "./+types/form-resource";
+import type { Route } from "./+types/form-fetcher";
 
 export const msgSchema = z.object({
   email: z

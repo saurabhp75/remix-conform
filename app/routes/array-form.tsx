@@ -73,6 +73,7 @@ export default function Example({ actionData }: Route.ComponentProps) {
           {...getFormProps(form)}
           className="bg-white shadow-md rounded-lg p-6 space-y-6"
         >
+          <button type="submit" className="hidden" />
           <h1 className="text-2xl font-bold text-gray-900 mb-6">Array form</h1>
 
           <div className="space-y-2">
