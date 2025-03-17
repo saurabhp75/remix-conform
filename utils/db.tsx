@@ -56,8 +56,6 @@ export async function createUser(data: UserType) {
 
   if (win) {
     console.log("### Something went wrong ###");
-    console.log(win);
-
     return null;
   }
 

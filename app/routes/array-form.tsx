@@ -125,11 +125,8 @@ export default function Example({ actionData }: Route.ComponentProps) {
                       key={undefined}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
                     />
-                    <div
-                      id={fields.emails.errorId}
-                      className="text-red-600 text-sm"
-                    >
-                      {fields.emails.errors}
+                    <div id={email.errorId} className="text-red-600 text-sm">
+                      {email.errors}
                     </div>
                   </div>
                   <button
