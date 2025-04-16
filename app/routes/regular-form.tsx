@@ -51,7 +51,11 @@ export default function Index({ actionData }: Route.ComponentProps) {
     // This not only sync the error sent from the server
     // But also used as the default value of the form
     // in case the document is reloaded for progressive enhancement
+    // It is optional, but required if you are validating on the server
     lastResult,
+
+    // (Optional) The initial value of the form.
+    // defaultValue,
 
     // Derive html validation attributes for each field
     constraint: getZodConstraint(schema),
@@ -63,8 +67,9 @@ export default function Index({ actionData }: Route.ComponentProps) {
     // defaults to value of shouldValidate
     // shouldRevalidate: "onInput", // "onSubmit"|"onBlur"|"onInput"
 
-    // Enable client side validation
-    // Run this funtion when the form is (re)validated
+    // Enable client side validation. Fallback to server validation if not provided
+    // Run this funtion when the form is (re)validated. TODO: Check if it disbales
+    // server validation
     onValidate({ formData }) {
       return parseWithZod(formData, { schema });
     },
